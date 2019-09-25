@@ -10,7 +10,8 @@ class WechatTest
 {
     const TOKEN = 'wechatdsc';
 
-    private function __construct()
+    // 构造方法，执行方法前进行判断
+    public function __construct()
     {
         if (!empty($_GET('echostr')))
         {
@@ -21,7 +22,6 @@ class WechatTest
     private function checkSign()
     {
         $input = $_GET;
-        var_dump($input);
         // 将signature，timestamp取出
         $signature = $input['signature'];
         $echostr = $input['echostr'];
@@ -42,3 +42,6 @@ class WechatTest
         }
     }
 }
+
+$wechat = new WechatTest();
+
