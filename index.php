@@ -22,6 +22,7 @@ class WechatTest
     private function checkSign()
     {
         $input = $_GET;
+        var_dump($input);
         // 将signature，timestamp取出
         $signature = $input['signature'];
         $echostr = $input['echostr'];
