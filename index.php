@@ -5,6 +5,7 @@
  * Date: 2019/9/25
  * Time: 10:37
  */
+$menu_list = include_once('./menu.php');
 
 class WechatTest
 {
@@ -121,6 +122,11 @@ class WechatTest
         return $str;
     }
 
+    /**
+     * @param string $url 要请求的url
+     * @param string $ret post请求参数
+     * @return mixed|string
+     */
     private function http_request(string $url, $ret='')
     {
         $ch = curl_init();
@@ -171,7 +177,19 @@ class WechatTest
         $mem->add($men_name, $access_token, 0, 7200);
         return $access_token;
     }
+
+    public function createMenu($menu)
+    {
+        if (is_array($menu))
+        {
+            $menu = json_encode($menu);
+        }
+        $url = ' https://api.weixin.qq.com/cgi-bin/menu/create?access_token=%s';
+        $url = sprintf($url, $this->getAccessToken());
+        $data = $this->http_request($url, $menu);
+        return $data;
+    }
 }
 
 $wechat = new WechatTest();
-echo $wechat->getAccessToken();
+$wechat->createMenu($menu_list);
