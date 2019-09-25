@@ -5,7 +5,7 @@
  * Date: 2019/9/25
  * Time: 10:37
  */
-$menu_list = include_once('./menu.php');
+$menu_list = include('./menu.php');
 
 class WechatTest
 {

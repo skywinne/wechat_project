@@ -7,7 +7,7 @@
  * Time: 16:06
  */
 
-return[
+return [
     "button"=> [
         [
             "name"=> "ЩЈТы",
