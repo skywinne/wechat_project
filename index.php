@@ -83,7 +83,7 @@ class WechatTest
     }
 
     // 创建回复文本消息
-    private function createText($obj, $content)
+    private function createText($obj, string $content)
     {
         $xml = '<xml>
  <ToUserName><![CDATA[%s]]></ToUserName>
@@ -116,32 +116,6 @@ class WechatTest
   </Image>
 </xml>';
         $str = sprintf($xml, $obj->FromUserName, $obj->ToUserName, time(), $obj->MediaId);
-        return $str;
-    }
-
-    //处理视频消息
-    private function videoFun($obj)
-    {
-        return $this->createVideo($obj);
-    }
-
-    //创建视频消息
-    private function createVideo($obj)
-    {
-        $xml = '<xml>
-  <ToUserName><![CDATA[%s]]></ToUserName>
-  <FromUserName><![CDATA[%s]]></FromUserName>
-  <CreateTime>%s</CreateTime>
-  <MsgType><![CDATA[video]]></MsgType>
-  <Video>
-    <MediaId><![CDATA[%s]]></MediaId>
-    <Title><![CDATA[%s]]></Title>
-    <Description><![CDATA[%s]]></Description>
-  </Video>
-</xml>';
-        $title = '测试回复视频消息';
-        $desc = '简介';
-        $str = sprintf($xml, $obj->FromUserName, $obj->ToUserName, time(), $obj->MediaId, $title, $desc);
         return $str;
     }
 }
