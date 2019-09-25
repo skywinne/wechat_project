@@ -186,6 +186,7 @@ class WechatTest
         }
         $url = ' https://api.weixin.qq.com/cgi-bin/menu/create?access_token=%s';
         $url = sprintf($url, $this->getAccessToken());
+        var_dump($this->getAccessToken());
         $data = $this->http_request($url, $menu);
         return $data;
     }
