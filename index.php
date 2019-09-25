@@ -9,6 +9,8 @@
 class WechatTest
 {
     const TOKEN = 'wechatdsc';
+    const APPID = 'wx352619ac0448bb52';
+    const APPSECRET = '828c28f7c873b0db885fac549ed020c8';
 
     // 构造方法，执行方法前进行判断
     public function __construct()
@@ -118,7 +120,46 @@ class WechatTest
         $str = sprintf($xml, $obj->FromUserName, $obj->ToUserName, time(), $obj->MediaId);
         return $str;
     }
+
+    private function http_request(string $url, $ret='')
+    {
+        $ch = curl_init();
+        //设置请求的url
+        curl_setopt($ch, CURLOPT_URL, $url);
+        //请求头关闭
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        //请求结果以字符串方式返回
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        //关闭SSL验证
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+
+        if($ret)
+        {
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $ret);
+        }
+        $data = curl_exec($ch);
+        //判断有无出错
+        if (curl_errno($ch) > 0)
+        {
+            echo curl_error($ch);
+            $data = '';
+        }
+
+        curl_close($ch);
+        return $data;
+    }
+    /**
+     * 获取accesstoken
+     */
+    public function getAccessToken()
+    {
+        $wechat_url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%s&secret=%s';
+        $wechat_url = sprintf($wechat_url, self::APPID, self::APPSECRET);
+        echo $this->http_request($wechat_url);
+    }
 }
 
 $wechat = new WechatTest();
-
+$wechat->getAccessToken();
