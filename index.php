@@ -6,7 +6,6 @@
  * Time: 10:37
  */
 $menu_list = include "./menu.php";
-var_dump($menu_list);
 
 class WechatTest
 {
@@ -183,7 +182,7 @@ class WechatTest
     {
         if (is_array($menu))
         {
-            $menu = json_encode($menu);
+            $menu = json_encode($menu, JSON_UNESCAPED_UNICODE);
         }
         $url = ' https://api.weixin.qq.com/cgi-bin/menu/create?access_token=%s';
         $url = sprintf($url, $this->getAccessToken());
