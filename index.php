@@ -113,9 +113,8 @@ class WechatTest
   <MsgType><![CDATA[video]]></MsgType>
   <MediaId><![CDATA[%s]]></MediaId>
   <ThumbMediaId><![CDATA[%s]]></ThumbMediaId>
-  <MsgId>%s</MsgId>
 </xml>';
-        $str = sprintf($xml, $obj->FromUserName, $obj->ToUserName, time(), $obj->MediaId, $obj->ThumbMediaId, $obj->MsgId);
+        $str = sprintf($xml, $obj->FromUserName, $obj->ToUserName, time(), $obj->MediaId, $obj->ThumbMediaId);
         return $str;
     }
 }
