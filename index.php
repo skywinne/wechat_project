@@ -150,7 +150,7 @@ class WechatTest
         if (curl_errno($ch) > 0)
         {
             echo curl_error($ch);
-            $data = 'http请求出错！';
+            $data = 'http请求出错！'.'['.curl_error($ch).']';
         }
 
         curl_close($ch);
