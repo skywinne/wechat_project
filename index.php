@@ -97,23 +97,23 @@ class WechatTest
         return $str;
     }
 
-    //处理视频消息
-    private function videoFun($obj)
+    //处理图片消息
+    private function imageFun($obj)
     {
-        return $this->createVideo($obj);
+        return $this->createImage($obj);
     }
 
-    //创建视频回复消息
-    private function createVideo($obj)
+    //创建图片回复消息
+    private function createImage($obj)
     {
         $xml = '<xml>
   <ToUserName><![CDATA[%s]]></ToUserName>
   <FromUserName><![CDATA[%s]]></FromUserName>
   <CreateTime>%s</CreateTime>
-  <MsgType><![CDATA[video]]></MsgType>
+  <MsgType><![CDATA[image]]></MsgType>
   <MediaId><![CDATA[%s]]></MediaId>
 </xml>';
-        $str = sprintf($xml, $obj->FromUserName, $obj->ToUserName, time(), $obj->MediaId, $obj->ThumbMediaId);
+        $str = sprintf($xml, $obj->FromUserName, $obj->ToUserName, time(), $obj->MediaId);
         return $str;
     }
 }
