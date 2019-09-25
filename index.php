@@ -112,7 +112,6 @@ class WechatTest
   <CreateTime>%s</CreateTime>
   <MsgType><![CDATA[video]]></MsgType>
   <MediaId><![CDATA[%s]]></MediaId>
-  <ThumbMediaId><![CDATA[%s]]></ThumbMediaId>
 </xml>';
         $str = sprintf($xml, $obj->FromUserName, $obj->ToUserName, time(), $obj->MediaId, $obj->ThumbMediaId);
         return $str;
