@@ -96,6 +96,28 @@ class WechatTest
         $str = sprintf($xml, $obj->FromUserName,$obj->ToUserName,time(),$content);
         return $str;
     }
+
+    //处理视频消息
+    private function videoFun($obj)
+    {
+        return $this->createVideo($obj);
+    }
+
+    //创建视频回复消息
+    private function createVideo($obj)
+    {
+        $xml = '<xml>
+  <ToUserName><![CDATA[%s]]></ToUserName>
+  <FromUserName><![CDATA[%s]]></FromUserName>
+  <CreateTime>%s</CreateTime>
+  <MsgType><![CDATA[video]]></MsgType>
+  <MediaId><![CDATA[%s]]></MediaId>
+  <ThumbMediaId><![CDATA[%s]]></ThumbMediaId>
+  <MsgId>%s</MsgId>
+</xml>';
+        $str = sprintf($xml, $obj->FromUserName, $obj->ToUserName, time(), $obj->MediaId, $obj->ThumbMediaId, $obj->MsgId);
+        return $str;
+    }
 }
 
 $wechat = new WechatTest();
