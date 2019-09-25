@@ -180,11 +180,11 @@ class WechatTest
 
     public function createMenu($menu)
     {
-        var_dump($menu);
         if (is_array($menu))
         {
             $menu = json_encode($menu, JSON_UNESCAPED_UNICODE);
         }
+        var_dump($menu);
         $url = ' https://api.weixin.qq.com/cgi-bin/menu/create?access_token=%s';
         $url = sprintf($url, $this->getAccessToken());
         $data = $this->http_request($url, $menu);
