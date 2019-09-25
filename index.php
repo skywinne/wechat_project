@@ -155,9 +155,21 @@ class WechatTest
      */
     public function getAccessToken()
     {
+        $mem = new Memcache();
+        $mem->connect('127.0.0.1', 11211);
+        $men_name = 'auth_'.self::APPID;
+        $value = $mem->get($men_name);
+        if ($value)
+        {
+            return $value;
+        }
         $wechat_url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%s&secret=%s';
         $wechat_url = sprintf($wechat_url, self::APPID, self::APPSECRET);
-        echo $this->http_request($wechat_url);
+        $json_data = $this->http_request($wechat_url);
+        $arr = json_decode($json_data, True);
+        $access_token = $arr['access_token'];
+        $mem->add($men_name, $access_token, 0, 7200);
+        return $access_token;
     }
 }
 
