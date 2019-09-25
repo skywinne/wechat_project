@@ -192,4 +192,4 @@ class WechatTest
 }
 
 $wechat = new WechatTest();
-$wechat->createMenu($menu_list);
+echo $wechat->createMenu($menu_list);
