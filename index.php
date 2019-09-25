@@ -140,7 +140,7 @@ class WechatTest
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
 
-        if($ret)
+        if($ret != '')
         {
             curl_setopt($ch, CURLOPT_POST, 1);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $ret);
@@ -150,7 +150,7 @@ class WechatTest
         if (curl_errno($ch) > 0)
         {
             echo curl_error($ch);
-            $data = '';
+            $data = 'http请求出错！';
         }
 
         curl_close($ch);
@@ -184,7 +184,6 @@ class WechatTest
         {
             $menu = json_encode($menu, JSON_UNESCAPED_UNICODE);
         }
-        var_dump($menu);
         $url = ' https://api.weixin.qq.com/cgi-bin/menu/create?access_token=%s';
         $url = sprintf($url, $this->getAccessToken());
         $data = $this->http_request($url, $menu);
