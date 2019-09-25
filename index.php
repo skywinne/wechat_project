@@ -13,7 +13,7 @@ class WechatTest
     // 构造方法，执行方法前进行判断
     public function __construct()
     {
-        if (!empty($_GET('echostr')))
+        if (!empty($_GET['echostr']))
         {
             echo $this->checkSign();
         }
