@@ -180,6 +180,7 @@ class WechatTest
 
     public function createMenu($menu)
     {
+        var_dump($menu);
         if (is_array($menu))
         {
             $menu = json_encode($menu, JSON_UNESCAPED_UNICODE);
