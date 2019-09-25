@@ -174,4 +174,4 @@ class WechatTest
 }
 
 $wechat = new WechatTest();
-$wechat->getAccessToken();
+echo $wechat->getAccessToken();
