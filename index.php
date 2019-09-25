@@ -33,7 +33,7 @@ class WechatTest
         $tmpStr = implode($input);
         // 进行加密操作
         $tmpStr = sha1( $tmpStr );
-
+        var_dump($tmpStr);
         //将数据进行比对
         if($tmpStr == $signature)
         {
