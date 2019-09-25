@@ -19,10 +19,10 @@ class WechatTest
         {
             echo $this->checkSign();
         }
-        else
-        {
-            $this->acceptMsg();
-        }
+//        else
+//        {
+//            $this->acceptMsg();
+//        }
     }
 
     private function checkSign()
