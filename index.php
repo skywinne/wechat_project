@@ -127,7 +127,7 @@ class WechatTest
      * @param string $ret post请求参数
      * @return mixed|string
      */
-    private function http_request(string $url, $ret='')
+    private function http_request(string $url)
     {
         $ch = curl_init();
         //设置请求的url
@@ -140,11 +140,6 @@ class WechatTest
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
 
-        if($ret != '')
-        {
-            curl_setopt($ch, CURLOPT_POST, 1);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $ret);
-        }
         $data = curl_exec($ch);
         //判断有无出错
         if (curl_errno($ch) > 0)
@@ -156,6 +151,30 @@ class WechatTest
         curl_close($ch);
         return $data;
     }
+
+    /**
+     * curl 提交post数据
+     */
+    private function http_request_post($url, $data)
+    {
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST,FALSE);
+        curl_setopt($curl, CURLOPT_POST, 1);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        $output = curl_exec($curl);
+        //判断有无出错
+        if (curl_errno($curl) > 0)
+        {
+            echo curl_error($curl);
+            $output = 'http请求出错！'.'['.curl_error($curl).']';
+        }
+        curl_close($curl);
+        return $output;
+    }
+
     /**
      * 获取accesstoken
      */
@@ -184,11 +203,9 @@ class WechatTest
         {
             $menu = json_encode($menu, JSON_UNESCAPED_UNICODE);
         }
-        echo $menu;
         $url = ' https://api.weixin.qq.com/cgi-bin/menu/create?access_token=%s';
         $url = sprintf($url, $this->getAccessToken());
-        var_dump($this->getAccessToken());
-        $data = $this->http_request($url, $menu);
+        $data = $this->http_request_post($url, $menu);
         return $data;
     }
 }
