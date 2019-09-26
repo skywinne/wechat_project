@@ -168,6 +168,7 @@ class WechatTest
         //判断有无出错
         if (curl_errno($curl) > 0)
         {
+            echo curl_errno($curl);
             echo curl_error($curl);
             $output = 'http请求出错！'.'['.curl_error($curl).']';
         }
