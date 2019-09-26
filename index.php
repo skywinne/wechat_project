@@ -168,7 +168,6 @@ class WechatTest
         //判断有无出错
         if (curl_errno($curl) > 0)
         {
-            echo curl_errno($curl);
             echo curl_error($curl);
             $output = 'http请求出错！'.'['.curl_error($curl).']';
         }
@@ -204,7 +203,7 @@ class WechatTest
         {
             $menu = json_encode($menu, JSON_UNESCAPED_UNICODE);
         }
-        $url = ' https://api.weixin.qq.com/cgi-bin/menu/create?access_token=%s';
+        $url = 'https://api.weixin.qq.com/cgi-bin/menu/create?access_token=%s';
         $url = sprintf($url, $this->getAccessToken());
         $data = $this->http_request_post($url, $menu);
         return $data;
