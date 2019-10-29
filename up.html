@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>上传素材</title>
+</head>
+<body>
+    <form action="post.php" method="post" enctype="multipart/form-data">
+        <p>
+            素材类型:
+            <select name="is_forever">
+                <option value="0">临时</option>
+                <option value="1">永久</option>
+            </select>
+            <input type="file" name="media" id="">
+            <input type="submit" value="提交素材">
+        </p>
+    </form>
+</body>
+</html>

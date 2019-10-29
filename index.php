@@ -155,8 +155,12 @@ class WechatTest
     /**
      * curl 提交post数据
      */
-    private function http_request_post($url, $data)
+    private function http_request_post($url, $data, $file='')
     {
+        if(!empty($file))
+        {
+            $data['media'] = new CURLFile($file);
+        }
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $url);
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
@@ -208,7 +212,26 @@ class WechatTest
         $data = $this->http_request_post($url, $menu);
         return $data;
     }
+
+    // 上传素材
+    public function uploadMaterial(string $path, string $type,$is_forever = 0)
+    {
+        if ($is_forever == 0)
+        {
+            $upload_url = 'https://api.weixin.qq.com/cgi-bin/media/upload?access_token=%s&type=%s';
+        }else{
+            $upload_url = 'https://api.weixin.qq.com/cgi-bin/material/add_material?access_token=%s&type=%s';
+        }
+
+        $url = sprintf($upload_url, $this->getAccessToken(), $type);
+        // 访问微信接口上传素材
+        $json = $this->http_request_post($url, [], $path);
+
+        // json转为数组
+        $arr = json_decode($json, true);
+
+        return $arr['media_id'];
+
+    }
 }
 
-$wechat = new WechatTest();
-echo $wechat->createMenu($menu_list);
