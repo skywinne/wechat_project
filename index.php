@@ -81,6 +81,10 @@ class WechatTest
     private function textFun($obj)
     {
         $content = $obj->Content;
+        if ($content == '图片素材')
+        {
+            return $this->createImage($obj, '0JYo9-5eoRTtAbhckWX5-eFQgavkz7Yow4zlXkw4NmLwl-H0olDArdVqdesh9A_z');
+        }
         $content = '公众号回复你：'.$content;
         return $this->createText($obj, $content);
     }
@@ -107,7 +111,7 @@ class WechatTest
     }
 
     //创建图片回复消息
-    private function createImage($obj)
+    private function createImage($obj, $mediaid)
     {
         $xml = '<xml>
   <ToUserName><![CDATA[%s]]></ToUserName>
@@ -118,6 +122,11 @@ class WechatTest
     <MediaId><![CDATA[%s]]></MediaId>
   </Image>
 </xml>';
+        // 如果有mediaid
+        if($mediaid)
+        {
+            $str = sprintf($xml, $obj->FromUserName, $obj->ToUserName, time(), $mediaid);
+        }
         $str = sprintf($xml, $obj->FromUserName, $obj->ToUserName, time(), $obj->MediaId);
         return $str;
     }
@@ -248,5 +257,5 @@ class WechatTest
 }
 
 $wx = new WechatTest();
-$wx->getMaterial();
+//$wx->getMaterial();
 
