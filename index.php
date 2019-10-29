@@ -233,5 +233,19 @@ class WechatTest
         return $arr['media_id'];
 
     }
+
+    //获取临时素材
+    public function getMaterial(){
+        $wxurl = 'https://api.weixin.qq.com/cgi-bin/media/get?access_token=%s&media_id=%s';
+
+        $url = sprintf($wxurl, $this->getAccessToken(), '0JYo9-5eoRTtAbhckWX5-eFQgavkz7Yow4zlXkw4NmLwl-H0olDArdVqdesh9A_z');
+
+        // 调取微信接口
+        $content = $this->http_request($url);
+        echo $content;
+    }
 }
+
+$wx = new WechatTest();
+$wx->getMaterial();
 
