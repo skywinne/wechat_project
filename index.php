@@ -126,8 +126,10 @@ class WechatTest
         if($mediaid)
         {
             $str = sprintf($xml, $obj->FromUserName, $obj->ToUserName, time(), $mediaid);
+        }else{
+            $str = sprintf($xml, $obj->FromUserName, $obj->ToUserName, time(), $obj->MediaId);
         }
-        $str = sprintf($xml, $obj->FromUserName, $obj->ToUserName, time(), $obj->MediaId);
+        
         return $str;
     }
 
