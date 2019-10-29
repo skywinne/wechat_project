@@ -242,7 +242,9 @@ class WechatTest
 
         // 调取微信接口
         $content = $this->http_request($url);
-        echo $content;
+
+        file_put_contents(__DIR__.'/uploads/1.jpg', $content);
+        echo __DIR__.'/uploads/1.jpg';
     }
 }
 
