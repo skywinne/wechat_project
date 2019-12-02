@@ -129,7 +129,7 @@ class WechatTest
         }else{
             $str = sprintf($xml, $obj->FromUserName, $obj->ToUserName, time(), $obj->MediaId);
         }
-        
+
         return $str;
     }
 
@@ -256,6 +256,10 @@ class WechatTest
 
         echo $content;
     }
+
+    /**
+     * 创建二维码
+     */
 }
 
 $wx = new WechatTest();
